@@ -3,8 +3,8 @@
 use function Pest\Laravel\get;
 
 test('GET home', function () {
-    $route = route('home');
-    $response = get($route);
+    $uri = route('home');
+    $response = get($uri);
 
     $response->assertOk();
 });

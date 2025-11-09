@@ -7,8 +7,8 @@ use function Pest\Laravel\get;
 
 test('GET blog.category', function () {
     $category = Category::factory()->create();
-    $route = route('blog.category', $category);
-    $response = get($route);
+    $uri = route('blog.category', $category);
+    $response = get($uri);
 
     $response->assertOk();
 });
@@ -16,8 +16,8 @@ test('GET blog.category', function () {
 test('GET blog.post', function () {
     $category = Category::factory()->create();
     $post = Post::factory()->for($category)->create();
-    $route = route('blog.post', [$category, $post]);
-    $response = get($route);
+    $uri = route('blog.post', [$category, $post]);
+    $response = get($uri);
 
     $response->assertOk();
 });
