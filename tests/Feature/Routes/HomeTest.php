@@ -7,4 +7,5 @@ test('GET home', function () {
     $response = get($uri);
 
     $response->assertOk();
+    $response->assertViewIs('home');
 });

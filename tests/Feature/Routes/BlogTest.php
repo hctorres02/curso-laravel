@@ -11,6 +11,7 @@ test('GET blog.category', function () {
     $response = get($uri);
 
     $response->assertOk();
+    $response->assertViewIs('blog.category');
 });
 
 test('GET blog.post', function () {
@@ -20,4 +21,5 @@ test('GET blog.post', function () {
     $response = get($uri);
 
     $response->assertOk();
+    $response->assertViewIs('blog.post');
 });

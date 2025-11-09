@@ -7,4 +7,5 @@ test('GET admin.home', function () {
     $response = get($uri);
 
     $response->assertOk();
+    $response->assertViewIs('admin.home');
 });

@@ -10,7 +10,7 @@ class CommentController extends Controller
 {
     public function index()
     {
-        //
+        return view('admin.comments.index');
     }
 
     public function update(Request $request, Comment $comment)

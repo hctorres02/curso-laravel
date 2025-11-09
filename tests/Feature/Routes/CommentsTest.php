@@ -11,6 +11,7 @@ test('GET comments.index', function () {
     $response = get($uri);
 
     $response->assertOk();
+    $response->assertViewIs('comments.index');
 });
 
 test('POST comments.store', function () {

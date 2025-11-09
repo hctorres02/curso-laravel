@@ -11,6 +11,7 @@ test('GET admin.categories.index', function () {
     $response = get($uri);
 
     $response->assertOk();
+    $response->assertViewIs('admin.categories.index');
 });
 
 test('GET admin.categories.create', function () {
@@ -18,6 +19,7 @@ test('GET admin.categories.create', function () {
     $response = get($uri);
 
     $response->assertOk();
+    $response->assertViewIs('admin.categories.create');
 });
 
 test('POST admin.categories.store', function () {
@@ -38,6 +40,7 @@ test('GET admin.categories.edit', function () {
     $response = get($uri);
 
     $response->assertOk();
+    $response->assertViewIs('admin.categories.edit');
 });
 
 test('PUT admin.categories.update', function () {

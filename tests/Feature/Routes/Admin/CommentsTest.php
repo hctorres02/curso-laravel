@@ -11,6 +11,7 @@ test('GET admin.comments.index', function () {
     $response = get($uri);
 
     $response->assertOk();
+    $response->assertViewIs('admin.comments.index');
 });
 
 test('PUT admin.comments.update', function () {

@@ -9,7 +9,7 @@ class CommentController extends Controller
 {
     public function index()
     {
-        //
+        return view('comments.index');
     }
 
     public function store(Request $request)

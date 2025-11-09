@@ -11,6 +11,7 @@ test('GET admin.users.index', function () {
     $response = get($uri);
 
     $response->assertOk();
+    $response->assertViewIs('admin.users.index');
 });
 
 test('GET admin.users.create', function () {
@@ -18,6 +19,7 @@ test('GET admin.users.create', function () {
     $response = get($uri);
 
     $response->assertOk();
+    $response->assertViewIs('admin.users.create');
 });
 
 test('POST admin.users.store', function () {
@@ -38,6 +40,7 @@ test('GET admin.users.edit', function () {
     $response = get($uri);
 
     $response->assertOk();
+    $response->assertViewIs('admin.users.edit');
 });
 
 test('PUT admin.users.update', function () {

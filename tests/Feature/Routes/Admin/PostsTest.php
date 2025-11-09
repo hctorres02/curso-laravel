@@ -13,6 +13,7 @@ test('GET admin.posts.index', function () {
     $response = get($uri);
 
     $response->assertOk();
+    $response->assertViewIs('admin.posts.index');
 });
 
 test('GET admin.posts.create', function () {
@@ -20,6 +21,7 @@ test('GET admin.posts.create', function () {
     $response = get($uri);
 
     $response->assertOk();
+    $response->assertViewIs('admin.posts.create');
 });
 
 test('POST admin.posts.preview', function () {
@@ -48,6 +50,7 @@ test('GET admin.posts.edit', function () {
     $response = get($uri);
 
     $response->assertOk();
+    $response->assertViewIs('admin.posts.edit');
 });
 
 test('PUT admin.posts.update', function () {

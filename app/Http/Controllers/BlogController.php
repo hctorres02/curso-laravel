@@ -9,11 +9,16 @@ class BlogController extends Controller
 {
     public function category(Category $category)
     {
-        //
+        return view('blog.category', compact(
+            'category',
+        ));
     }
 
     public function post(Category $category, Post $post)
     {
-        //
+        return view('blog.post', compact(
+            'category',
+            'post',
+        ));
     }
 }

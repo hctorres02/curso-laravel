@@ -7,6 +7,7 @@ test('GET admin.medias.index', function () {
     $response = get($uri);
 
     $response->assertOk();
+    $response->assertViewIs('admin.medias.index');
 });
 
 test('GET admin.medias.create', function () {
@@ -14,6 +15,7 @@ test('GET admin.medias.create', function () {
     $response = get($uri);
 
     $response->assertOk();
+    $response->assertViewIs('admin.medias.create');
 });
 
 test('POST admin.medias.store', function () {
