@@ -2,4 +2,4 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => 'Home');
+Route::get('/', fn () => 'Home')->name('home');
