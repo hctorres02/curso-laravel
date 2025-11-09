@@ -42,4 +42,14 @@ class UserController extends Controller
     {
         return to_route('admin.users.edit', $user);
     }
+
+    public function restore(User $user)
+    {
+        return to_route('admin.users.edit', $user);
+    }
+
+    public function forceDestroy(User $user)
+    {
+        return to_route('admin.users.index');
+    }
 }

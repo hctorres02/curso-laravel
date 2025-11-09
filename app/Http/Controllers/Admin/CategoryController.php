@@ -42,4 +42,14 @@ class CategoryController extends Controller
     {
         return to_route('admin.categories.edit', $category);
     }
+
+    public function restore(Category $category)
+    {
+        return to_route('admin.categories.edit', $category);
+    }
+
+    public function forceDestroy(Category $category)
+    {
+        return to_route('admin.categories.index');
+    }
 }

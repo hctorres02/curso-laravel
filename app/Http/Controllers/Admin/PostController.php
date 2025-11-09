@@ -18,6 +18,11 @@ class PostController extends Controller
         //
     }
 
+    public function preview(Request $request)
+    {
+        //
+    }
+
     public function store(Request $request)
     {
         //
@@ -41,5 +46,15 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         return to_route('admin.posts.edit', $post);
+    }
+
+    public function restore(Post $post)
+    {
+        return to_route('admin.posts.edit', $post);
+    }
+
+    public function forceDestroy(Post $post)
+    {
+        return to_route('admin.posts.index');
     }
 }
