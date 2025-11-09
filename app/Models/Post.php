@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\PostStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -18,6 +19,13 @@ class Post extends Model
         'body',
         'status',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'status' => PostStatus::class,
+        ];
+    }
 
     public function author(): BelongsTo
     {
