@@ -19,6 +19,27 @@
                     <li>
                         <a href="{{ route('home') }}">Home</a>
                     </li>
+                    @if ($categories)
+                        <li x-data="{ open: false }">
+                            <a href="#" @click="open=true">Categories</a>
+                            <template x-teleport="body">
+                                <dialog open x-show="open">
+                                    <article @click.outside="open=false">
+                                        <header>
+                                            <h3>Categories</h3>
+                                            <button rel="prev" @click="open=false"></button>
+                                        </header>
+                                        <nav>
+                                            <aside>
+                                                <ul>
+                                                </ul>
+                                            </aside>
+                                        </nav>
+                                    </article>
+                                </dialog>
+                            </template>
+                        </li>
+                    @endif
                 </ul>
             </nav>
         </header>
