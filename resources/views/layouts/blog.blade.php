@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@push('head')
+    <style>
+        .container {
+            max-width: 720px;
+            padding-inline: calc(var(--pico-block-spacing-vertical) * 2);
+        }
+    </style>
+@endpush
+
 @section('body')
     <header class="container top-spaced">
         <hgroup>
