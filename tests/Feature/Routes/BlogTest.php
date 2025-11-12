@@ -12,6 +12,7 @@ test('GET blog.category', function () {
 
     $response->assertOk();
     $response->assertViewIs('blog.category');
+    $response->assertViewHas('categories');
 });
 
 test('GET blog.post', function () {
@@ -22,4 +23,5 @@ test('GET blog.post', function () {
 
     $response->assertOk();
     $response->assertViewIs('blog.post');
+    $response->assertViewHas('categories');
 });

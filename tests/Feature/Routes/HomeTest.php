@@ -8,4 +8,5 @@ test('GET home', function () {
 
     $response->assertOk();
     $response->assertViewIs('home');
+    $response->assertViewHas('categories');
 });
