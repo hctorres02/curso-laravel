@@ -1,3 +1,10 @@
-<div>
-    <!-- It always seems impossible until it is done. - Nelson Mandela -->
-</div>
+@extends('layouts.admin')
+
+@section('title', 'Comments')
+
+@section('main')
+    <header class="bottom-spaced">
+        <h2>Comments</h2>
+        <hr>
+    </header>
+@endsection

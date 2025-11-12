@@ -1,3 +1,10 @@
-<div>
-    <!-- Waste no more time arguing what a good man should be, be one. - Marcus Aurelius -->
-</div>
+@extends('layouts.admin')
+
+@section('title', 'Posts')
+
+@section('main')
+    <header class="bottom-spaced">
+        <h2>Posts</h2>
+        <hr>
+    </header>
+@endsection

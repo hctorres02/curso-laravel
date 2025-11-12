@@ -1,3 +1,3 @@
-<div>
-    <!-- We must ship. - Taylor Otwell -->
-</div>
+@extends('layouts.blog')
+
+@section('title', 'My Comments')
