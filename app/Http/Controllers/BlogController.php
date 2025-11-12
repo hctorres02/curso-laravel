@@ -9,8 +9,11 @@ class BlogController extends Controller
 {
     public function category(Category $category)
     {
+        $posts = [];
+
         return view('blog.category', compact(
             'category',
+            'posts',
         ));
     }
 
