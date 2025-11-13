@@ -23,3 +23,16 @@ if (! function_exists('parseDate')) {
         return Carbon::parse($value, config('app.local_timezone'))->locale(config('app.locale'));
     }
 }
+
+if (! function_exists('resolveCurrentValue')) {
+    function resolveCurrentValue($current, $default = null): mixed
+    {
+        $resolved = $current ?: $default;
+
+        if ($resolved instanceof \BackedEnum) {
+            return $resolved->value;
+        }
+
+        return $resolved;
+    }
+}

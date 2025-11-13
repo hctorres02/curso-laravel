@@ -15,39 +15,19 @@
             <h1>A blog CMS</h1>
             <p>Powered by Laravel</p>
         </hgroup>
-        <nav>
-            <ul>
-                <li>
-                    <a href="{{ route('home') }}">Home</a>
-                </li>
-                @if ($categories)
-                    <li x-data="{ open: false }">
-                        <a href="#" @click="open=true">Categories</a>
-                        <template x-teleport="body">
-                            <dialog open x-show="open">
-                                <article @click.outside="open=false">
-                                    <header>
-                                        <h3>Categories</h3>
-                                        <button rel="prev" @click="open=false"></button>
-                                    </header>
-                                    <nav>
-                                        <aside>
-                                            <ul>
-                                                @foreach ($categories as $slug => $name)
-                                                    <li>
-                                                        <a href="{{ route('blog.category', $slug) }}">{{ $name }}</a>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </aside>
-                                    </nav>
-                                </article>
-                            </dialog>
-                        </template>
-                    </li>
-                @endif
-            </ul>
-        </nav>
+        <x-nav>
+            <x-nav.a :href="route('home')">Home</x-nav.a>
+            <x-nav.a x-data="{ open: false }" @click="open=true" :when="$categories">
+                Categories
+                <x-dialog title="Categories">
+                    <x-nav as-list>
+                        @foreach ($categories as $slug => $name)
+                            <x-nav.a :href="route('blog.category', $slug)">{{ $name }}</x-nav.a>
+                        @endforeach
+                    </x-nav>
+                </x-dialog>
+            </x-nav.a>
+        </x-nav>
     </header>
     <main class="container">
         @yield('main')
