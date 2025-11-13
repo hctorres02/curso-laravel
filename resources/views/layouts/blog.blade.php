@@ -27,6 +27,8 @@
                     </x-nav>
                 </x-dialog>
             </x-nav.a>
+            <x-nav.separator />
+            <x-nav.a :href="route('login')">Login</x-nav.a>
         </x-nav>
     </header>
     <main class="container">
