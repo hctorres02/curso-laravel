@@ -1,14 +1,14 @@
 <?php
 
 use App\Models\Comment;
+use App\Models\User;
 
-use function Pest\Laravel\delete;
-use function Pest\Laravel\get;
-use function Pest\Laravel\post;
+use function Pest\Laravel\actingAs;
 
 test('GET comments.index', function () {
     $uri = route('comments.index');
-    $response = get($uri);
+    $user = User::factory()->create();
+    $response = actingAs($user)->get($uri);
 
     $response->assertOk();
     $response->assertViewIs('comments.index');
@@ -16,7 +16,8 @@ test('GET comments.index', function () {
 
 test('POST comments.store', function () {
     $uri = route('comments.store');
-    $response = post($uri);
+    $user = User::factory()->create();
+    $response = actingAs($user)->post($uri);
 
     $response->assertRedirectBack();
 });
@@ -24,7 +25,8 @@ test('POST comments.store', function () {
 test('DELETE comments.destroy', function () {
     $comment = Comment::factory()->create();
     $uri = route('comments.destroy', $comment);
-    $response = delete($uri);
+    $user = User::factory()->create();
+    $response = actingAs($user)->delete($uri);
 
     $response->assertRedirectBack();
 });

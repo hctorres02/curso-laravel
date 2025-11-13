@@ -1,10 +1,12 @@
 <?php
 
-use function Pest\Laravel\get;
+use App\Models\User;
+use function Pest\Laravel\actingAs;
 
 test('GET admin.medias.index', function () {
     $uri = route('admin.medias.index');
-    $response = get($uri);
+    $admin = User::factory()->create();
+    $response = actingAs($admin)->get($uri);
 
     $response->assertOk();
     $response->assertViewIs('admin.medias.index');
@@ -12,7 +14,8 @@ test('GET admin.medias.index', function () {
 
 test('GET admin.medias.create', function () {
     $uri = route('admin.medias.create');
-    $response = get($uri);
+    $admin = User::factory()->create();
+    $response = actingAs($admin)->get($uri);
 
     $response->assertOk();
     $response->assertViewIs('admin.medias.create');

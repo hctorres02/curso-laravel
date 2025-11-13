@@ -2,13 +2,13 @@
 
 use App\Models\Comment;
 
-use function Pest\Laravel\delete;
-use function Pest\Laravel\get;
-use function Pest\Laravel\put;
+use App\Models\User;
+use function Pest\Laravel\actingAs;
 
 test('GET admin.comments.index', function () {
     $uri = route('admin.comments.index');
-    $response = get($uri);
+    $admin = User::factory()->create();
+    $response = actingAs($admin)->get($uri);
 
     $response->assertOk();
     $response->assertViewIs('admin.comments.index');
@@ -17,7 +17,8 @@ test('GET admin.comments.index', function () {
 test('PUT admin.comments.update', function () {
     $comment = Comment::factory()->create();
     $uri = route('admin.comments.update', $comment);
-    $response = put($uri);
+    $admin = User::factory()->create();
+    $response = actingAs($admin)->put($uri);
 
     $response->assertAccepted();
 });
@@ -25,7 +26,8 @@ test('PUT admin.comments.update', function () {
 test('DELETE admin.comments.destroy', function () {
     $comment = Comment::factory()->create();
     $uri = route('admin.comments.destroy', $comment);
-    $response = delete($uri);
+    $admin = User::factory()->create();
+    $response = actingAs($admin)->delete($uri);
 
     $response->assertNoContent();
 });
