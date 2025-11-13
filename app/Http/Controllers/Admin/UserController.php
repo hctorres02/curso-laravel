@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\User\IndexRequest;
+use App\Http\Requests\Admin\User\StoreRequest;
+use App\Http\Requests\Admin\User\UpdateRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(IndexRequest $request)
     {
         return view('admin.users.index');
     }
@@ -18,7 +20,7 @@ class UserController extends Controller
         return view('admin.users.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -37,7 +39,7 @@ class UserController extends Controller
         ));
     }
 
-    public function update(Request $request, User $user)
+    public function update(UpdateRequest $request, User $user)
     {
         return to_route('admin.users.edit', $user);
     }

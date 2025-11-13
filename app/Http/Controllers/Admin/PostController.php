@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Post\IndexRequest;
+use App\Http\Requests\Admin\Post\StoreRequest;
+use App\Http\Requests\Admin\Post\UpdateRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(IndexRequest $request)
     {
         return view('admin.posts.index');
     }
@@ -23,7 +26,7 @@ class PostController extends Controller
         //
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -38,7 +41,7 @@ class PostController extends Controller
         return view('admin.posts.edit');
     }
 
-    public function update(Request $request, Post $post)
+    public function update(UpdateRequest $request, Post $post)
     {
         return to_route('admin.posts.edit', $post);
     }
