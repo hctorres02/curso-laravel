@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use App\Enums\CommentStatus;
+use App\Traits\TimestampsFormatter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Comment extends Model
 {
+    use TimestampsFormatter;
+
     protected $fillable = [
         'author_id',
         'post_id',
