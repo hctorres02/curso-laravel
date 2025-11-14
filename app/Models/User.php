@@ -19,6 +19,13 @@ class User extends Model
         'password',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'password' => 'hashed',
+        ];
+    }
+
     public function avatar(): BelongsTo
     {
         return $this->belongsTo(Media::class);
