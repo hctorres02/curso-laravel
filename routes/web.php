@@ -10,7 +10,7 @@ Route::prefix('/admin')->group(function () {
     Route::get('/', fn () => 'Admin home')->name('admin.home');
 });
 
-Route::prefix('/{category}')->group(function () {
+Route::prefix('/{category:slug}')->group(function () {
     Route::get('/', fn (Category $category) => $category)->name('blog.category');
-    Route::get('/{post}', fn (Category $category, Post $post) => "{$category}: {$post}")->name('blog.post');
+    Route::get('/{post:slug}', fn (Category $category, Post $post) => "{$category}: {$post}")->name('blog.post');
 });
