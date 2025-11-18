@@ -15,9 +15,13 @@
             <h1>A blog CMS</h1>
             <p>Powered by Laravel</p>
         </hgroup>
-        <x-nav class="h-scroll">
-            <x-nav.a :href="route('home')">Home</x-nav.a>
-            <x-nav.a x-data="{ open: false }" @click="open=true" :when="$shared_categories">
+        <x-nav x-data>
+            <x-nav.a :href="route('home')" :current="Route::is('home')">Home</x-nav.a>
+            @auth
+                <x-nav.a :href="route('admin.home')">Admin</x-nav.a>
+                <x-nav.separator />
+            @endauth
+            <x-nav.a x-data="{ open: false }" @click="open=true" :when="$shared_categories" :current="Route::is('blog.category')">
                 Categories
                 <x-dialog title="Categories">
                     <x-nav as-list>
@@ -27,9 +31,14 @@
                     </x-nav>
                 </x-dialog>
             </x-nav.a>
-            <x-nav.a :href="route('comments.index')">My Comments</x-nav.a>
-            <x-nav.separator />
-            <x-nav.a :href="route('login')">Login</x-nav.a>
+            @auth
+                <x-nav.a :href="route('comments.index')" :current="Route::is('comments.index')">My Comments</x-nav.a>
+                <x-nav.separator />
+                <x-nav.a @click="ghostForm('{{ route('logout') }}')">Logout</x-nav.a>
+            @else
+                <x-nav.separator />
+                <x-nav.a :href="route('login')">Login</x-nav.a>
+            @endif
         </x-nav>
     </header>
     <main class="container">
