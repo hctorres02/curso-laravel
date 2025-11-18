@@ -11,6 +11,12 @@ test('GET admin.users.index', function () {
     $route = route('admin.users.index');
 
     get($route)
+        ->assertViewIs('admin.users.index')
+        ->assertViewHasAll([
+            'roles',
+            'searchParams',
+            'users',
+        ])
         ->assertOk();
 });
 
@@ -18,6 +24,11 @@ test('GET admin.users.create', function () {
     $route = route('admin.users.create');
 
     get($route)
+        ->assertViewIs('admin.users.create')
+        ->assertViewHasAll([
+            'permissions',
+            'roles',
+        ])
         ->assertOk();
 });
 
@@ -38,6 +49,11 @@ test('GET admin.users.edit', function () {
     $route = route('admin.users.edit', $user);
 
     get($route)
+        ->assertViewIs('admin.users.edit')
+        ->assertViewHasAll([
+            'permissions',
+            'roles',
+        ])
         ->assertOk();
 });
 

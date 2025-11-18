@@ -15,12 +15,23 @@ class UserController extends Controller
         $roles = UserRole::toArray();
         $searchParams = collect();
         $users = [];
+
+        return view('admin.users.index', compact(
+            'roles',
+            'searchParams',
+            'users',
+        ));
     }
 
     public function create()
     {
         $permissions = UserPermission::toArray();
         $roles = UserRole::toArray();
+
+        return view('admin.users.create', compact(
+            'permissions',
+            'roles',
+        ));
     }
 
     public function store(Request $request)
@@ -30,13 +41,21 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        //
+        return view('admin.users.show', compact(
+            'user',
+        ));
     }
 
     public function edit(User $user)
     {
         $permissions = UserPermission::toArray();
         $roles = UserRole::toArray();
+
+        return view('admin.users.edit', compact(
+            'permissions',
+            'roles',
+            'user',
+        ));
     }
 
     public function update(Request $request, User $user)

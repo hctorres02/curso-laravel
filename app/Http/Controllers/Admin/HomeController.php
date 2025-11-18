@@ -19,5 +19,15 @@ class HomeController extends Controller
         $monthlyPosts = [];
         $monthlyComments = [];
         $storageUsage = [];
+
+        return view('admin.home', compact(
+            'countCategories',
+            'countComments',
+            'countPosts',
+            'countUsers',
+            'monthlyPosts',
+            'monthlyComments',
+            'storageUsage',
+        ));
     }
 }

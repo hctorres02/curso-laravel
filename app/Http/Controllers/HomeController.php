@@ -9,5 +9,9 @@ class HomeController extends Controller
     public function __invoke(Request $request)
     {
         $posts = [];
+
+        return view('home', compact(
+            'posts',
+        ));
     }
 }

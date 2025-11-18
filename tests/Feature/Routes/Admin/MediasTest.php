@@ -6,6 +6,12 @@ test('GET admin.medias.index', function () {
     $route = route('admin.medias.index');
 
     get($route)
+        ->assertViewIs('admin.medias.index')
+        ->assertViewHasAll([
+            'directories',
+            'medias',
+            'searchParams',
+        ])
         ->assertOk();
 });
 

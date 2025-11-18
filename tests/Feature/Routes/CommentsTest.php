@@ -10,6 +10,11 @@ test('GET comments.index', function () {
     $route = route('comments.index');
 
     get($route)
+        ->assertViewIs('comments.index')
+        ->assertViewHasAll([
+            'shared_categories',
+            'comments',
+        ])
         ->assertOk();
 });
 

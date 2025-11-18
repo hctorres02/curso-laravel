@@ -13,6 +13,12 @@ class CommentController extends Controller
         $statuses = CommentStatus::toArray();
         $searchParams = collect();
         $comments = [];
+
+        return view('admin.comments.index', compact(
+            'comments',
+            'searchParams',
+            'statuses',
+        ));
     }
 
     public function approve(Comment $comment)
