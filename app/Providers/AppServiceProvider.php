@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        ViewFacade::composer('home', fn (View $view) => $view->with([
+        ViewFacade::composer('layouts.blog', fn (View $view) => $view->with([
             'shared_categories' => [],
         ]));
     }
