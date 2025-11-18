@@ -29,7 +29,7 @@
             </x-nav.a>
             <x-nav.a :href="route('comments.index')">My Comments</x-nav.a>
             <x-nav.separator />
-            <x-nav.a :href="route('admin.home')">Admin</x-nav.a>
+            <x-nav.a :href="route('login')">Login</x-nav.a>
         </x-nav>
     </header>
     <main class="container">
