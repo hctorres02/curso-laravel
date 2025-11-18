@@ -43,4 +43,14 @@ class CategoryController extends Controller
     {
         return back();
     }
+
+    public function forceDestroy(Category $category)
+    {
+        return to_route('admin.categories.index');
+    }
+
+    public function restore(Category $category)
+    {
+        return back();
+    }
 }
