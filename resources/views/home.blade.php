@@ -4,41 +4,12 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@2/css/pico.min.css">
-        <style>
-            article>header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-
-            article header:has(img) {
-                padding: 0;
-                overflow: hidden;
-            }
-
-            article hgroup a {
-                text-decoration: none;
-            }
-
-            .container {
-                max-width: 720px;
-                padding-inline: calc(var(--pico-block-spacing-vertical) * 2);
-            }
-
-            .bottom-spaced {
-                margin-bottom: calc(var(--pico-block-spacing-vertical) * 4);
-            }
-
-            .top-spaced {
-                margin-top: calc(var(--pico-block-spacing-vertical) * 4);
-            }
-        </style>
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
         <title>Home page</title>
     </head>
 
     <body>
-        <header class="container top-spaced">
+        <header class="container container-narrow top-spaced">
             <hgroup>
                 <h1>A blog CMS</h1>
                 <p>Powered by Laravel</p>
@@ -51,7 +22,7 @@
                 </ul>
             </nav>
         </header>
-        <main class="container">
+        <main class="container container-narrow">
             <article>
                 <header>
                     <img src="https://picsum.photos/720/405" width="720" height="405">
@@ -75,7 +46,7 @@
                 </p>
             </article>
         </main>
-        <footer class="container">
+        <footer class="container container-narrow">
             <p>
                 <small>
                     Styled with <a href="https://picocss.com" target="_blank">Pico CSS</a>.
