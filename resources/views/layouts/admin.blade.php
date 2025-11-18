@@ -12,6 +12,8 @@
             <x-nav.a :href="route('admin.medias.index')" :current="Route::is('admin.medias.*')">Medias</x-nav.a>
             <x-nav.a :href="route('admin.posts.index')" :current="Route::is('admin.posts.*')">Posts</x-nav.a>
             <x-nav.a :href="route('admin.users.index')" :current="Route::is('admin.users.*')">Users</x-nav.a>
+            <x-nav.separator />
+            <x-nav.a @click="ghostForm('{{ route('logout') }}')">Logout</x-nav.a>
         </x-nav>
     </header>
     <main class="container">
