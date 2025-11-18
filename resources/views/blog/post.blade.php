@@ -13,8 +13,28 @@
         <p>
             <a href="{{ route('blog.category', $post->category) }}">{{ $post->category->name }}</a>,
             {{ $post->created_at_relative }}
-            &mdash; <a href="{{ route('home', ['author' => $post->author]) }}">{{ $post->author->name }}</a>
         </p>
     </hgroup>
     {!! $post->body_decoded !!}
+    <section id="form-comment">
+        <x-form method="post" :action="route('comments.store')">
+            <x-input name="post_slug" type="hidden" :value="$post->slug" />
+            <x-textarea label="Comment" name="body" rows="3" />
+            <x-button label="Comment" icon="comment" type="submit" />
+        </x-form>
+    </section>
+    <section id="comments">
+        @forelse ($comments as $comment)
+            <p>
+                <strong>{{ $comment->author->name }}</strong>
+                <br>
+                {{ $comment->body }}
+            </p>
+            @if ($loop->last)
+                {{ $comments->links('shared.pagination') }}
+            @endif
+        @empty
+            <h6>There are no comments.</h6>
+        @endforelse
+    </section>
 @endsection
