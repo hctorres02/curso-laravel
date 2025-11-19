@@ -9,6 +9,7 @@ class BlogController extends Controller
 {
     public function category(Category $category)
     {
+        $query = $category->posts();
         $posts = [];
 
         return view('blog.category', compact(

@@ -9,6 +9,7 @@ class CommentController extends Controller
 {
     public function index()
     {
+        $query = Comment::query();
         $comments = [];
 
         return view('comments.index', compact(
