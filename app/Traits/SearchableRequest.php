@@ -28,4 +28,11 @@ trait SearchableRequest
     {
         return $this->defaultRules();
     }
+
+    public function validated($key = null, $default = null)
+    {
+        $data = data_get($this->validator->validated(), $key, $default);
+
+        return collect($data)->filter(fn ($value) => $value !== '' || $value !== null);
+    }
 }

@@ -14,7 +14,7 @@ class MediaController extends Controller
     public function index(IndexRequest $request)
     {
         $directories = MediaDirectory::toArray();
-        $searchParams = collect();
+        $searchParams = $request->validated();
         $medias = [];
 
         return view('admin.medias.index', compact(
@@ -31,7 +31,7 @@ class MediaController extends Controller
 
     public function store(StoreRequest $request)
     {
-        //
+        $attributes = $request->validated();
     }
 
     public function show(Media $media)
@@ -48,6 +48,8 @@ class MediaController extends Controller
 
     public function update(UpdateRequest $request, Media $media)
     {
+        $attributes = $request->validated();
+
         return back();
     }
 

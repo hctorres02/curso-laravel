@@ -17,7 +17,7 @@ class PostController extends Controller
         $authors = [];
         $categories = [];
         $statuses = PostStatus::toArray();
-        $searchParams = collect();
+        $searchParams = $request->validated();
         $posts = [];
 
         return view('admin.posts.index', compact(
@@ -47,7 +47,7 @@ class PostController extends Controller
 
     public function store(StoreRequest $request)
     {
-        //
+        $attributes = $request->validated();
     }
 
     public function show(Post $post)
@@ -69,6 +69,8 @@ class PostController extends Controller
 
     public function update(UpdateRequest $request, Post $post)
     {
+        $attributes = $request->validated();
+
         return back();
     }
 

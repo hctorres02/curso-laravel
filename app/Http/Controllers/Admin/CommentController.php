@@ -12,7 +12,7 @@ class CommentController extends Controller
     public function index(IndexRequest $request)
     {
         $statuses = CommentStatus::toArray();
-        $searchParams = collect();
+        $searchParams = $request->validated();
         $comments = [];
 
         return view('admin.comments.index', compact(

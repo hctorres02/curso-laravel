@@ -15,7 +15,7 @@ class UserController extends Controller
     public function index(IndexRequest $request)
     {
         $roles = UserRole::toArray();
-        $searchParams = collect();
+        $searchParams = $request->validated();
         $users = [];
 
         return view('admin.users.index', compact(
@@ -38,7 +38,7 @@ class UserController extends Controller
 
     public function store(StoreRequest $request)
     {
-        //
+        $attributes = $request->validated();
     }
 
     public function show(User $user)
@@ -60,6 +60,8 @@ class UserController extends Controller
 
     public function update(UpdateRequest $request, User $user)
     {
+        $attributes = $request->validated();
+
         return back();
     }
 

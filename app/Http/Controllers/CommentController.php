@@ -18,6 +18,8 @@ class CommentController extends Controller
 
     public function store(StoreRequest $request)
     {
+        $attributes = $request->validated();
+
         return back();
     }
 
