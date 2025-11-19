@@ -8,6 +8,12 @@
     <nav class="bottom-spaced" style="align-items: baseline">
         <h2>Comments</h2>
     </nav>
+    <x-form :model="$searchParams" class="grid grid-2-2-2">
+        <div role="group">
+            <x-select placeholder="Status" name="status" :options="$statuses" />
+            <x-button type="submit" icon="filter" />
+        </div>
+    </x-form>
     @forelse ($comments as $comment)
         <blockquote>
             <strong>{{ $comment->created_at_date }} :: {{ $comment->post->title }}</strong>
@@ -32,4 +38,5 @@
     @empty
         <h6>There are no comments.</h6>
     @endforelse
+    {{ $comments->appends($searchParams->all())->links('shared.pagination') }}
 @endsection

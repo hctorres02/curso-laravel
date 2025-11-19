@@ -11,12 +11,14 @@ class PostController extends Controller
 {
     public function index()
     {
+        $authors = [];
         $categories = [];
         $statuses = PostStatus::toArray();
         $searchParams = collect();
         $posts = [];
 
         return view('admin.posts.index', compact(
+            'authors',
             'categories',
             'posts',
             'searchParams',

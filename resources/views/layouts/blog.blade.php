@@ -15,39 +15,22 @@
             <h1>A blog CMS</h1>
             <p>Powered by Laravel</p>
         </hgroup>
-        <nav>
-            <ul>
-                <li>
-                    <a href="{{ route('home') }}">Home</a>
-                </li>
-                @if ($shared_categories)
-                    <li x-data="{ open: false }">
-                        <a href="#" @click="open=true">Categories</a>
-                        <template x-teleport="body">
-                            <dialog open x-show="open">
-                                <article @click.outside="open=false">
-                                    <header>
-                                        <h3>Categories</h3>
-                                        <button rel="prev" @click="open=false"></button>
-                                    </header>
-                                    <nav>
-                                        <aside>
-                                            <ul>
-                                                @foreach ($shared_categories as $slug => $name)
-                                                    <li>
-                                                        <a href="{{ route('blog.category', $slug) }}">{{ $name }}</a>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </aside>
-                                    </nav>
-                                </article>
-                            </dialog>
-                        </template>
-                    </li>
-                @endif
-            </ul>
-        </nav>
+        <x-nav class="h-scroll">
+            <x-nav.a :href="route('home')">Home</x-nav.a>
+            <x-nav.a x-data="{ open: false }" @click="open=true" :when="$shared_categories">
+                Categories
+                <x-dialog title="Categories">
+                    <x-nav as-list>
+                        @foreach ($shared_categories as $slug => $name)
+                            <x-nav.a :href="route('blog.category', $slug)">{{ $name }}</x-nav.a>
+                        @endforeach
+                    </x-nav>
+                </x-dialog>
+            </x-nav.a>
+            <x-nav.a :href="route('comments.index')">My Comments</x-nav.a>
+            <x-nav.separator />
+            <x-nav.a :href="route('admin.home')">Admin</x-nav.a>
+        </x-nav>
     </header>
     <main class="container">
         @yield('main')

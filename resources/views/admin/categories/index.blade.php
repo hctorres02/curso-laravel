@@ -10,4 +10,37 @@
             Create category
         </a>
     </nav>
+    <x-form :model="$searchParams" x-data @submit.prevent="stripEmptyFields">
+        <div class="grid">
+            <div role="group">
+                <x-input name="search" placeholder="Search" />
+                <x-button type="submit" icon="search" />
+            </div>
+        </div>
+        <x-input type="hidden" name="orderBy" />
+        <x-input type="hidden" name="sort" />
+    </x-form>
+    <x-table :$searchParams>
+        <x-slot name="thead">
+            <x-table.th label="Name" orderBy="name" />
+            <x-table.th label="Created at" orderBy="created_at" />
+        </x-slot>
+        @forelse ($categories as $category)
+            <tr>
+                <td>
+                    <a href="{{ route('admin.categories.edit', $category) }}">
+                        {{ $category->name }}
+                    </a>
+                </td>
+                <td>
+                    {{ $category->created_at_date }}
+                </td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="2">There are no categories.</td>
+            </tr>
+        @endforelse
+    </x-table>
+    {{ $categories->appends($searchParams->all())->links('shared.pagination') }}
 @endsection
