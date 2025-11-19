@@ -10,7 +10,7 @@ class CommentController extends Controller
     public function index()
     {
         $query = Comment::query();
-        $comments = [];
+        $comments = $query->get();
 
         return view('comments.index', compact(
             'comments',
