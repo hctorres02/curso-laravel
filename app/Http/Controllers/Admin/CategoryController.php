@@ -13,10 +13,7 @@ class CategoryController extends Controller
     public function index(IndexRequest $request)
     {
         $searchParams = $request->validated();
-        $query = Category::query()
-            ->when($searchParams->get('search'), fn ($query, $search) => $query->whereLike('name', "%{$search}%"))
-            ->orderBy($searchParams->get('orderBy'), $searchParams->get('sort'));
-        $categories = $query->paginate();
+        $categories = Category::searchable($searchParams)->paginate();
 
         return view('admin.categories.index', compact(
             'categories',

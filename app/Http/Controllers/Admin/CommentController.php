@@ -13,10 +13,7 @@ class CommentController extends Controller
     {
         $statuses = CommentStatus::toArray();
         $searchParams = $request->validated();
-        $query = Comment::query()
-            ->when($searchParams->get('status'), fn ($query, $status) => $query->where('status', $status))
-            ->orderBy($searchParams->get('orderBy'), $searchParams->get('sort'));
-        $comments = $query->paginate();
+        $comments = Comment::searchable($searchParams)->paginate();
 
         return view('admin.comments.index', compact(
             'comments',

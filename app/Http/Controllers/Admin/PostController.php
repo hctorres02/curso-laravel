@@ -20,12 +20,7 @@ class PostController extends Controller
         $categories = Category::orderBy('name')->pluck('name', 'id');
         $statuses = PostStatus::toArray();
         $searchParams = $request->validated();
-        $query = Post::query()
-            ->when($searchParams->get('category_id'), fn ($query, $category_id) => $query->where('category_id', $category_id))
-            ->when($searchParams->get('search'), fn ($query, $search) => $query->whereLike('title', "%{$search}%"))
-            ->when($searchParams->get('status'), fn ($query, $status) => $query->where('status', $status))
-            ->orderBy($searchParams->get('orderBy'), $searchParams->get('sort'));
-        $posts = $query->paginate();
+        $posts = Post::searchable($searchParams)->paginate();
 
         return view('admin.posts.index', compact(
             'authors',
