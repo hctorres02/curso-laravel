@@ -26,8 +26,12 @@
                 'type' => 'radio',
                 'name' => $name,
                 'value' => $value,
+                'aria-invalid' => when($errors->has($name), 'true'),
             ]) }} @checked((string) $value === (string) $current)>
             {{ $option }}
         </label>
     @endforeach
+    @error($name)
+        <small style="color: var(--pico-del-color)">{{ $message }}</small>
+    @enderror
 </fieldset>

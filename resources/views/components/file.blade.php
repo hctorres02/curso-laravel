@@ -25,7 +25,7 @@
             <input x-model="url" aria-hidden="true" disabled>
         </template>
     @endif
-    <label role="button" class="outline secondary" style="margin-bottom: var(--pico-block-spacing-vertical)">
+    <label role="button" class="outline secondary" style="margin-bottom: var(--pico-block-spacing-vertical); {{ when($errors->has($name), 'border-color: var(--pico-del-color);') }}">
         {{ $label }}
         @if ($attributes->has('required'))
             <span style="color: var(--pico-del-color)">*</span>
@@ -36,7 +36,11 @@
             'data-has-preview' => json_encode($preview),
             '@change' => 'handleFileSelected',
             'style' => 'display: none',
+            'aria-invalid' => when($errors->has($name), 'true'),
         ]) }}>
+        @error($name)
+            <small style="margin-block: var(--pico-block-spacing-vertical) 0">{{ $message }}</small>
+        @enderror
     </label>
 </div>
 

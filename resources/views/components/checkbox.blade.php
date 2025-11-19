@@ -38,10 +38,14 @@
             <input {{ $attributes->except(['type'])->merge([
                 'type' => 'checkbox',
                 'name' => $name,
+                'aria-invalid' => when($errors->has($name), 'true'),
                 'checked' => $current,
                 'data-checked' => json_encode((bool) $current),
             ]) }}>
             {{ $label }}
+            @error($name)
+                <small style="margin-bottom: 0"><br>{{ $message }}</small>
+            @enderror
         </label>
     @endif
 </fieldset>
