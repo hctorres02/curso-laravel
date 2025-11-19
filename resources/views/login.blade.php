@@ -17,6 +17,7 @@
             <x-form method="post" :action="route('login.store')">
                 <x-input label="Email" name="email" type="email" required autofocus />
                 <x-input label="Password" name="password" type="password" required />
+                <x-checkbox label="Remember me" name="remember" />
                 <x-button label="Sign in" icon="sign-in-alt" type="submit" />
             </x-form>
         </div>
