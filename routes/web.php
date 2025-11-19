@@ -17,7 +17,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     });
 
     Route::prefix('/comments')->group(function () {
-        Route::post('/{comment}/approve', [Admin\CommentController::class, 'approve'])->name('admin.comments.approve');
+        Route::post('/{comment}/approve', [Admin\CommentController::class, 'approve'])->name('admin.comments.approve')->middleware('comment.is_pending');
     });
 
     Route::prefix('/posts')->group(function () {
@@ -46,5 +46,5 @@ Route::resource('/comments', CommentController::class)->names('comments')->only(
 
 Route::prefix('/{category:slug}')->group(function () {
     Route::get('/', [BlogController::class, 'category'])->name('blog.category');
-    Route::get('/{post:slug}', [BlogController::class, 'post'])->name('blog.post')->scopeBindings();
+    Route::get('/{post:slug}', [BlogController::class, 'post'])->name('blog.post')->scopeBindings()->middleware('post.is_published');
 });
