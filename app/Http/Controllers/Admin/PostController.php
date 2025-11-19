@@ -20,7 +20,10 @@ class PostController extends Controller
         $categories = Category::pluck('name', 'id');
         $statuses = PostStatus::toArray();
         $searchParams = $request->validated();
-        $query = Post::query();
+        $query = Post::query()
+            ->when($searchParams->get('category_id'), fn ($query, $category_id) => $query)
+            ->when($searchParams->get('search'), fn ($query, $search) => $query)
+            ->when($searchParams->get('status'), fn ($query, $status) => $query);
         $posts = $query->paginate();
 
         return view('admin.posts.index', compact(
