@@ -15,7 +15,7 @@
         <a href="{{ route(Route::currentRouteName(), $searchParams->merge([
             'orderBy' => $orderBy,
             'sort' => when($isCurrent && ! $sortDesc, 'desc'),
-        ])->filter()->all()) }}">
+        ])->filter(fn ($value) => $value !== '' || $value !== null)->all()) }}">
             {{ $label }}
             <i @class([
                 'fas',

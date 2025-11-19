@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
     public function index(IndexRequest $request)
     {
-        $searchParams = collect();
+        $searchParams = $request->validated();
         $categories = [];
 
         return view('admin.categories.index', compact(
@@ -28,7 +28,7 @@ class CategoryController extends Controller
 
     public function store(StoreRequest $request)
     {
-        //
+        $attributes = $request->validated();
     }
 
     public function show(Category $category)
@@ -45,6 +45,8 @@ class CategoryController extends Controller
 
     public function update(UpdateRequest $request, Category $category)
     {
+        $attributes = $request->validated();
+
         return back();
     }
 
