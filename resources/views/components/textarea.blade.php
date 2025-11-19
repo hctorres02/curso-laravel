@@ -9,7 +9,7 @@
     'markdownToolbar' => null,
 ])
 
-@php($value = resolveCurrentValue($name, $model, $value))
+@php($value = resolveCurrentValue($name, $model, old($name, $value)))
 
 <div x-data="{{ $attributes->get('x-data', '{}') }}">
     <label for="{{ $name }}">
