@@ -13,6 +13,7 @@
         <p>
             <a href="{{ route('blog.category', $post->category) }}">{{ $post->category->name }}</a>,
             {{ $post->created_at_relative }}
+            &mdash; {{ Str::plural('comment', $post->comments_count, true) }}
         </p>
     </hgroup>
     {!! $post->body_decoded !!}

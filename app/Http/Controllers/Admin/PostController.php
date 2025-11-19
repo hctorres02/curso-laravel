@@ -20,7 +20,9 @@ class PostController extends Controller
         $categories = Category::orderBy('name')->pluck('name', 'id');
         $statuses = PostStatus::toArray();
         $searchParams = $request->validated();
-        $posts = Post::searchable($searchParams)->with('category')->paginate();
+        $posts = Post::searchable($searchParams)
+            ->with('author', 'category')
+            ->paginate();
 
         return view('admin.posts.index', compact(
             'authors',

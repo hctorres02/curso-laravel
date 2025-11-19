@@ -31,6 +31,8 @@
                     <a href="{{ route('admin.categories.edit', $category) }}">
                         {{ $category->name }}
                     </a>
+                    <br>
+                    <small>{{ Str::plural('Post', $category->posts_count, true) }}</small>
                 </td>
                 <td>
                     {{ $category->created_at_date }}
