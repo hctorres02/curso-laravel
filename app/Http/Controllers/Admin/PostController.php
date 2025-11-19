@@ -16,14 +16,15 @@ class PostController extends Controller
 {
     public function index(IndexRequest $request)
     {
-        $authors = User::pluck('name', 'id');
-        $categories = Category::pluck('name', 'id');
+        $authors = User::orderBy('name')->pluck('name', 'id');
+        $categories = Category::orderBy('name')->pluck('name', 'id');
         $statuses = PostStatus::toArray();
         $searchParams = $request->validated();
         $query = Post::query()
             ->when($searchParams->get('category_id'), fn ($query, $category_id) => $query->where('category_id', $category_id))
             ->when($searchParams->get('search'), fn ($query, $search) => $query->whereLike('title', "%{$search}%"))
-            ->when($searchParams->get('status'), fn ($query, $status) => $query->where('status', $status));
+            ->when($searchParams->get('status'), fn ($query, $status) => $query->where('status', $status))
+            ->orderBy($searchParams->get('orderBy'), $searchParams->get('sort'));
         $posts = $query->paginate();
 
         return view('admin.posts.index', compact(
@@ -37,7 +38,7 @@ class PostController extends Controller
 
     public function create()
     {
-        $categories = Category::pluck('name', 'id');
+        $categories = Category::orderBy('name')->pluck('name', 'id');
         $statuses = PostStatus::toArray();
 
         return view('admin.posts.create', compact(
@@ -63,7 +64,7 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        $categories = Category::pluck('name', 'id');
+        $categories = Category::orderBy('name')->pluck('name', 'id');
         $statuses = PostStatus::toArray();
 
         return view('admin.posts.edit', compact(
