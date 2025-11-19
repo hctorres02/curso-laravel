@@ -11,6 +11,8 @@ class IndexRequest extends FormRequest
 {
     use SearchableRequest;
 
+    protected $redirectRoute = 'admin.comments.index';
+
     public function rules(): array
     {
         return $this->defaultRules([

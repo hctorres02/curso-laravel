@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\Rule;
 
 trait SearchableRequest
@@ -13,6 +14,15 @@ trait SearchableRequest
             'sort' => ['required', Rule::in(['asc', 'desc'])],
             'search' => ['nullable'],
         ], $extraRules);
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $exception = $validator->getException();
+
+        throw new $exception($validator)
+            ->errorBag($this->errorBag)
+            ->redirectTo(route($this->redirectRoute));
     }
 
     public function prepareForValidation(): void

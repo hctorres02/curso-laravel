@@ -13,6 +13,8 @@ class IndexRequest extends FormRequest
 {
     use SearchableRequest;
 
+    protected $redirectRoute = 'admin.posts.index';
+
     protected string $defaultOrderBy = 'title';
 
     protected string $defaultSort = 'asc';
@@ -27,7 +29,7 @@ class IndexRequest extends FormRequest
     {
         return $this->defaultRules([
             'author_id' => ['nullable', Rule::exists(User::class, 'id')],
-            'category_id' => ['nullable', Rule::exists(Category::class)],
+            'category_id' => ['nullable', Rule::exists(Category::class, 'id')],
             'status' => ['nullable', Rule::enum(PostStatus::class)],
         ]);
     }
