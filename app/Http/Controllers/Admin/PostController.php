@@ -18,6 +18,7 @@ class PostController extends Controller
         $categories = [];
         $statuses = PostStatus::toArray();
         $searchParams = $request->validated();
+        $query = Post::query();
         $posts = [];
 
         return view('admin.posts.index', compact(
