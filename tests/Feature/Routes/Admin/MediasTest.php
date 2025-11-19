@@ -13,6 +13,12 @@ test('GET admin.medias.index', function () {
         ->assertRedirectToRoute('login');
 
     actingAs($admin)
+        ->get(route('admin.medias.index', [
+            'directory' => 'not-exists',
+        ]))
+        ->assertSessionHasErrors(['directory']);
+
+    actingAs($admin)
         ->get($route)
         ->assertViewIs('admin.medias.index')
         ->assertViewHasAll([

@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\UserPermission;
 use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\User\IndexRequest;
+use App\Http\Requests\Admin\User\StoreRequest;
+use App\Http\Requests\Admin\User\UpdateRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(IndexRequest $request)
     {
         $roles = UserRole::toArray();
         $searchParams = collect();
@@ -34,7 +36,7 @@ class UserController extends Controller
         ));
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -56,7 +58,7 @@ class UserController extends Controller
         ));
     }
 
-    public function update(Request $request, User $user)
+    public function update(UpdateRequest $request, User $user)
     {
         return back();
     }

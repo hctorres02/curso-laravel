@@ -17,6 +17,12 @@ test('GET admin.comments.index', function () {
         ->assertRedirectToRoute('login');
 
     actingAs($admin)
+        ->get(route('admin.comments.index', [
+            'status' => 'not-exists',
+        ]))
+        ->assertSessionHasErrors(['status']);
+
+    actingAs($admin)
         ->get($route)
         ->assertViewIs('admin.comments.index')
         ->assertViewHasAll([

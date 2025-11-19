@@ -81,7 +81,18 @@ test('PUT admin.categories.update', function () {
         ->assertRedirectToRoute('login');
 
     actingAs($admin)
-        ->put($route)
+        ->put($route, [
+            'name' => '',
+            'description' => '',
+            'slug' => Category::factory()->create()->slug,
+        ])
+        ->assertInvalid(['name', 'description', 'slug']);
+
+    actingAs($admin)
+        ->put($route, [
+            'name' => 'New name',
+            'description' => 'New description',
+        ])
         ->assertRedirectBack();
 });
 

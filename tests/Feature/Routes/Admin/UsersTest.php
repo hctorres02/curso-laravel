@@ -87,7 +87,17 @@ test('PUT admin.users.update', function () {
         ->assertRedirectToRoute('login');
 
     actingAs($admin)
-        ->put($route)
+        ->put($route, [
+            'name' => '',
+            'email' => 'invalid',
+        ])
+        ->assertInvalid(['name', 'email']);
+
+    actingAs($admin)
+        ->put($route, [
+            'name' => 'New name',
+            'email' => 'new-email@example.com',
+        ])
         ->assertRedirectBack();
 });
 

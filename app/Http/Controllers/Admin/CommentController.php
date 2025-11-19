@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\CommentStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Comment\IndexRequest;
 use App\Models\Comment;
 
 class CommentController extends Controller
 {
-    public function index()
+    public function index(IndexRequest $request)
     {
         $statuses = CommentStatus::toArray();
         $searchParams = collect();
