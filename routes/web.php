@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
 
-Route::prefix('/admin')->group(function () {
+Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/', Admin\HomeController::class)->name('admin.home');
 
     Route::prefix('/categories')->group(function () {
@@ -42,7 +42,7 @@ Route::prefix('/admin')->group(function () {
     Route::resource('/users', Admin\UserController::class)->names('admin.users');
 });
 
-Route::resource('/comments', CommentController::class)->names('comments')->only('index', 'store', 'destroy');
+Route::resource('/comments', CommentController::class)->names('comments')->only('index', 'store', 'destroy')->middleware('auth');
 
 Route::prefix('/{category:slug}')->group(function () {
     Route::get('/', [BlogController::class, 'category'])->name('blog.category');
