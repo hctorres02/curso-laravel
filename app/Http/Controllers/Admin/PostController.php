@@ -7,15 +7,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Post\IndexRequest;
 use App\Http\Requests\Admin\Post\StoreRequest;
 use App\Http\Requests\Admin\Post\UpdateRequest;
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     public function index(IndexRequest $request)
     {
-        $authors = [];
-        $categories = [];
+        $authors = User::pluck('name', 'id');
+        $categories = Category::pluck('name', 'id');
         $statuses = PostStatus::toArray();
         $searchParams = $request->validated();
         $query = Post::query();
@@ -32,7 +34,7 @@ class PostController extends Controller
 
     public function create()
     {
-        $categories = [];
+        $categories = Category::pluck('name', 'id');
         $statuses = PostStatus::toArray();
 
         return view('admin.posts.create', compact(
@@ -58,7 +60,7 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        $categories = [];
+        $categories = Category::pluck('name', 'id');
         $statuses = PostStatus::toArray();
 
         return view('admin.posts.edit', compact(

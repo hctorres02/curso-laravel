@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use Illuminate\Support\Facades\View as ViewFacade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\View;
@@ -22,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         ViewFacade::composer('layouts.blog', fn (View $view) => $view->with([
-            'shared_categories' => [],
+            'shared_categories' => Category::pluck('name', 'slug'),
         ]));
     }
 }
