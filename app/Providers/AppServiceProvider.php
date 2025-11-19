@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         ViewFacade::composer('layouts.blog', fn (View $view) => $view->with([
-            'shared_categories' => Category::pluck('name', 'slug'),
+            'shared_categories' => Category::orderBy('name')->pluck('name', 'slug'),
         ]));
     }
 }

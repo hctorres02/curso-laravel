@@ -17,7 +17,8 @@ class MediaController extends Controller
         $searchParams = $request->validated();
         $query = Media::query()
             ->when($searchParams->get('directory'), fn ($query, $directory) => $query->whereLike('path', "{$directory}%"))
-            ->when($searchParams->get('search'), fn ($query, $search) => $query->whereLike('name', "%{$search}%"));
+            ->when($searchParams->get('search'), fn ($query, $search) => $query->whereLike('name', "%{$search}%"))
+            ->orderBy($searchParams->get('orderBy'), $searchParams->get('sort'));
         $medias = $query->paginate();
 
         return view('admin.medias.index', compact(

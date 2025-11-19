@@ -9,8 +9,7 @@ class CommentController extends Controller
 {
     public function index()
     {
-        $query = Comment::query();
-        $comments = $query->simplePaginate(5);
+        $comments = Comment::latest()->simplePaginate(5);
 
         return view('comments.index', compact(
             'comments',

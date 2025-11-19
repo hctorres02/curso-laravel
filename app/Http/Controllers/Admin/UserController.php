@@ -18,7 +18,8 @@ class UserController extends Controller
         $searchParams = $request->validated();
         $query = User::query()
             ->when($searchParams->get('role'), fn ($query, $role) => $query->where('role', $role))
-            ->when($searchParams->get('search'), fn ($query, $search) => $query->whereAny(['email', 'name'], 'LIKE', "%{$search}%"));
+            ->when($searchParams->get('search'), fn ($query, $search) => $query->whereAny(['email', 'name'], 'LIKE', "%{$search}%"))
+            ->orderBy($searchParams->get('orderBy'), $searchParams->get('sort'));
         $users = $query->paginate();
 
         return view('admin.users.index', compact(

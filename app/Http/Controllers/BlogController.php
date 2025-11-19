@@ -9,8 +9,7 @@ class BlogController extends Controller
 {
     public function category(Category $category)
     {
-        $query = $category->posts();
-        $posts = $query->simplePaginate(5);
+        $posts = $category->posts()->latest()->simplePaginate(5);
 
         return view('blog.category', compact(
             'category',
@@ -20,8 +19,7 @@ class BlogController extends Controller
 
     public function post(Category $category, Post $post)
     {
-        $query = $post->comments();
-        $comments = $query->simplePaginate(5);
+        $comments = $post->comments()->oldest()->simplePaginate(5);
 
         return view('blog.post', compact(
             'category',
