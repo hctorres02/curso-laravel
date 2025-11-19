@@ -14,7 +14,7 @@ class CommentController extends Controller
         $statuses = CommentStatus::toArray();
         $searchParams = $request->validated();
         $query = Comment::query();
-        $comments = [];
+        $comments = $query->get();
 
         return view('admin.comments.index', compact(
             'comments',

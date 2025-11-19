@@ -17,7 +17,7 @@ class UserController extends Controller
         $roles = UserRole::toArray();
         $searchParams = $request->validated();
         $query = User::query();
-        $users = [];
+        $users = $query->get();
 
         return view('admin.users.index', compact(
             'roles',

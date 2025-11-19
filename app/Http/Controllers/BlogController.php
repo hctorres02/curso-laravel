@@ -10,7 +10,7 @@ class BlogController extends Controller
     public function category(Category $category)
     {
         $query = $category->posts();
-        $posts = [];
+        $posts = $query->get();
 
         return view('blog.category', compact(
             'category',
@@ -20,7 +20,8 @@ class BlogController extends Controller
 
     public function post(Category $category, Post $post)
     {
-        $comments = [];
+        $query = $post->comments();
+        $comments = $query->get();
 
         return view('blog.post', compact(
             'category',

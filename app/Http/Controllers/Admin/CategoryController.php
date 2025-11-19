@@ -14,7 +14,7 @@ class CategoryController extends Controller
     {
         $searchParams = $request->validated();
         $query = Category::query();
-        $categories = [];
+        $categories = $query->get();
 
         return view('admin.categories.index', compact(
             'categories',
