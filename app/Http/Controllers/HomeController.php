@@ -10,7 +10,7 @@ class HomeController extends Controller
     public function __invoke(Request $request)
     {
         $query = Post::query();
-        $posts = $query->get();
+        $posts = $query->simplePaginate(5);
 
         return view('home', compact(
             'posts',

@@ -19,7 +19,7 @@ class PostController extends Controller
         $statuses = PostStatus::toArray();
         $searchParams = $request->validated();
         $query = Post::query();
-        $posts = $query->get();
+        $posts = $query->paginate();
 
         return view('admin.posts.index', compact(
             'authors',
