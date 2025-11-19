@@ -9,7 +9,7 @@ class CommentController extends Controller
 {
     public function index()
     {
-        $comments = Comment::latest()->simplePaginate(5);
+        $comments = Comment::latest()->with('author', 'post.category')->simplePaginate(5);
 
         return view('comments.index', compact(
             'comments',

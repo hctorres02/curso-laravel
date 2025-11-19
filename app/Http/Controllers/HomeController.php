@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $posts = Post::published()->latest()->simplePaginate(5);
+        $posts = Post::published()->latest()->with('author', 'category')->simplePaginate(5);
 
         return view('home', compact(
             'posts',
