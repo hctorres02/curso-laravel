@@ -21,4 +21,5 @@
     @empty
         <h6>There are no comments.</h6>
     @endforelse
+    {{ $comments->links('shared.pagination') }}
 @endsection

@@ -14,7 +14,7 @@ class CategoryController extends Controller
     {
         $searchParams = $request->validated();
         $query = Category::query();
-        $categories = $query->get();
+        $categories = $query->paginate();
 
         return view('admin.categories.index', compact(
             'categories',

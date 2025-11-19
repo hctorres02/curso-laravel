@@ -19,7 +19,7 @@
         @endif
     </article>
     @if ($loop->last)
-        {{ $posts->appends($searchParams->all())->links('shared.pagination') }}
+        {{ $posts->links('shared.pagination') }}
     @endif
 @empty
     <h6>There are no posts.</h6>
