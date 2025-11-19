@@ -15,6 +15,11 @@ class CommentController extends Controller
         $comments = [];
     }
 
+    public function approve(Comment $comment)
+    {
+        return back();
+    }
+
     public function destroy(Comment $comment)
     {
         return back();

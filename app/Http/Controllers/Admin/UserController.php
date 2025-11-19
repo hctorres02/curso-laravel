@@ -48,4 +48,14 @@ class UserController extends Controller
     {
         return back();
     }
+
+    public function forceDestroy(User $user)
+    {
+        return to_route('admin.users.index');
+    }
+
+    public function restore(User $user)
+    {
+        return back();
+    }
 }

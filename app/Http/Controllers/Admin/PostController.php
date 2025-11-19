@@ -23,6 +23,11 @@ class PostController extends Controller
         $statuses = PostStatus::toArray();
     }
 
+    public function preview(Request $request)
+    {
+        //
+    }
+
     public function store(Request $request)
     {
         //
@@ -45,6 +50,16 @@ class PostController extends Controller
     }
 
     public function destroy(Post $post)
+    {
+        return back();
+    }
+
+    public function forceDestroy(Post $post)
+    {
+        return to_route('admin.posts.index');
+    }
+
+    public function restore(Post $post)
     {
         return back();
     }
