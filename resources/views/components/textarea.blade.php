@@ -30,7 +30,11 @@
         'name' => $name,
         'placeholder' => $label,
         'x-ref' => 'textarea',
+        'aria-invalid' => when($errors->has($name), 'true'),
     ]) }}>{{ $value }}</textarea>
+    @error($name)
+        <small>{{ $message }}</small>
+    @enderror
 </div>
 
 @once

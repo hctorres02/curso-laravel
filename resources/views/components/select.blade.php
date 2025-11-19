@@ -22,6 +22,7 @@
         </strong>
         <select {{ $attributes->merge([
             'name' => $name,
+            'aria-invalid' => when($errors->has($name), 'true'),
         ]) }}>
             @if ($placeholder !== false)
                 <option value="">{{ $placeholder ?: $label }}</option>
@@ -30,10 +31,14 @@
                 <option value="{{ $value }}" @selected(in_array($value, Arr::wrap($current), true))>{{ $option }}</option>
             @endforeach
         </select>
+        @error($name)
+            <small>{{ $message }}</small>
+        @enderror
     </label>
 @else
     <select {{ $attributes->merge([
         'name' => $name,
+        'aria-invalid' => when($errors->has($name), 'true'),
     ]) }}>
         @if ($placeholder !== false)
             <option value="">{{ $placeholder ?: $label }}</option>

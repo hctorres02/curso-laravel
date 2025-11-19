@@ -23,12 +23,17 @@
             'name' => $name,
             'value' => $value,
             'placeholder' => $placeholder ?: $label,
+            'aria-invalid' => when($errors->has($name), 'true'),
         ]) }}>
+        @error($name)
+            <small>{{ $message }}</small>
+        @enderror
     </label>
 @else
     <input {{ $attributes->merge([
         'name' => $name,
         'value' => $value,
         'placeholder' => $placeholder ?: $label,
+        'aria-invalid' => when($errors->has($name), 'true'),
     ]) }}>
 @endif
