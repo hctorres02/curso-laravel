@@ -21,9 +21,9 @@ class PostController extends Controller
         $statuses = PostStatus::toArray();
         $searchParams = $request->validated();
         $query = Post::query()
-            ->when($searchParams->get('category_id'), fn ($query, $category_id) => $query)
-            ->when($searchParams->get('search'), fn ($query, $search) => $query)
-            ->when($searchParams->get('status'), fn ($query, $status) => $query);
+            ->when($searchParams->get('category_id'), fn ($query, $category_id) => $query->where('category_id', $category_id))
+            ->when($searchParams->get('search'), fn ($query, $search) => $query->whereLike('title', "%{$search}%"))
+            ->when($searchParams->get('status'), fn ($query, $status) => $query->where('status', $status));
         $posts = $query->paginate();
 
         return view('admin.posts.index', compact(
