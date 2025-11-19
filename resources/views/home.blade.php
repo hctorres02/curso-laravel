@@ -32,6 +32,11 @@
                                         <nav>
                                             <aside>
                                                 <ul>
+                                                    @foreach ($categories as $slug => $name)
+                                                        <li>
+                                                            <a href="{{ route('blog.category', $slug) }}">{{ $name }}</a>
+                                                        </li>
+                                                    @endforeach
                                                 </ul>
                                             </aside>
                                         </nav>
@@ -44,28 +49,30 @@
             </nav>
         </header>
         <main class="container container-narrow">
-            <article>
-                <header>
-                    <img src="https://picsum.photos/720/405" width="720" height="405">
-                </header>
-                <hgroup>
-                    <h2>
-                        <a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a>
-                    </h2>
-                    <p>
-                        <a href="#">Lorem ipsum</a>,
-                        Just now
-                        &mdash; <a href="#">John Doe</a>
-                    </p>
-                </hgroup>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Qui accusantium quisquam cupiditate.
-                    Quasi nobis adipisci iure commodi facere,
-                    a asperiores aspernatur quis quos expedita!
-                    Quas ullam aut quam accusamus molestiae?
-                </p>
-            </article>
+            @forelse ($posts as $post)
+                <article @class(['bottom-spaced' => ! $loop->last])>
+                    @if ($post->cover)
+                        <header>
+                            <img src="{{ $post->cover->url }}" width="720" height="405">
+                        </header>
+                    @endif
+                    <hgroup>
+                        <h2>
+                            <a href="{{ route('blog.post', [$post->category, $post]) }}">{{ $post->title }}</a>
+                        </h2>
+                        <p>
+                            <a href="{{ route('blog.category', $post->category) }}">{{ $post->category->name }}</a>,
+                            {{ $post->created_at_relative }}
+                            &mdash; <a href="{{ route('home', ['author' => $post->author]) }}">{{ $post->author->name }}</a>
+                        </p>
+                    </hgroup>
+                    @if ($post->headline)
+                        <p>{{ $post->headline }}</p>
+                    @endif
+                </article>
+            @empty
+                <h6>There are no posts.</h6>
+            @endforelse
         </main>
         <footer class="container container-narrow">
             <p>
