@@ -9,7 +9,7 @@
     'value' => '',
 ])
 
-@php($value = resolveCurrentValue($name, $model, $value))
+@php($value = resolveCurrentValue($name, $model, old($name, $value)))
 
 @if ($label)
     <label>

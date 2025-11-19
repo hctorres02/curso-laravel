@@ -10,7 +10,7 @@
     'options' => [],
 ])
 
-@php($current = resolveCurrentValue($name, $model, $current))
+@php($current = resolveCurrentValue($name, $model, old($name, $current)))
 
 @if ($label)
     <label>

@@ -9,7 +9,7 @@
     'options' => null,
 ])
 
-@php($current = resolveCurrentValue($name, $model, $current))
+@php($current = resolveCurrentValue($name, $model, old($name, $current)))
 
 <fieldset>
     @if (is_array($options))
