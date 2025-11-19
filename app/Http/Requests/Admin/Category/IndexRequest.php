@@ -9,6 +9,8 @@ class IndexRequest extends FormRequest
 {
     use SearchableRequest;
 
+    protected $redirectRoute = 'admin.categories.index';
+
     protected string $defaultOrderBy = 'name';
 
     protected string $defaultSort = 'asc';
