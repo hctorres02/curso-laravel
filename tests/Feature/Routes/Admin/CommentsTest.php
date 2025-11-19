@@ -11,6 +11,12 @@ test('GET admin.comments.index', function () {
     $route = route('admin.comments.index');
 
     get($route)
+        ->assertViewIs('admin.comments.index')
+        ->assertViewHasAll([
+            'comments',
+            'searchParams',
+            'statuses',
+        ])
         ->assertOk();
 });
 

@@ -10,6 +10,10 @@ class CommentController extends Controller
     public function index()
     {
         $comments = [];
+
+        return view('comments.index', compact(
+            'comments',
+        ));
     }
 
     public function store(Request $request)

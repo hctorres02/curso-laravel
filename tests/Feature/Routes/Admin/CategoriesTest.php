@@ -11,6 +11,10 @@ test('GET admin.categories.index', function () {
     $route = route('admin.categories.index');
 
     get($route)
+        ->assertViewIs('admin.categories.index')
+        ->assertViewHasAll([
+            'categories', 'searchParams',
+        ])
         ->assertOk();
 });
 
@@ -18,6 +22,7 @@ test('GET admin.categories.create', function () {
     $route = route('admin.categories.create');
 
     get($route)
+        ->assertViewIs('admin.categories.create')
         ->assertOk();
 });
 
@@ -38,6 +43,10 @@ test('GET admin.categories.edit', function () {
     $route = route('admin.categories.edit', $category);
 
     get($route)
+        ->assertViewIs('admin.categories.edit')
+        ->assertViewHasAll([
+            'category',
+        ])
         ->assertOk();
 });
 

@@ -14,11 +14,17 @@ class MediaController extends Controller
         $directories = MediaDirectory::toArray();
         $searchParams = collect();
         $medias = [];
+
+        return view('admin.medias.index', compact(
+            'directories',
+            'medias',
+            'searchParams',
+        ));
     }
 
     public function create()
     {
-        //
+        return view('admin.medias.create');
     }
 
     public function store(Request $request)
@@ -33,7 +39,9 @@ class MediaController extends Controller
 
     public function edit(Media $media)
     {
-        //
+        return view('admin.medias.edit', compact(
+            'media',
+        ));
     }
 
     public function update(Request $request, Media $media)

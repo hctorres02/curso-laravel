@@ -15,12 +15,24 @@ class PostController extends Controller
         $statuses = PostStatus::toArray();
         $searchParams = collect();
         $posts = [];
+
+        return view('admin.posts.index', compact(
+            'categories',
+            'posts',
+            'searchParams',
+            'statuses',
+        ));
     }
 
     public function create()
     {
         $categories = [];
         $statuses = PostStatus::toArray();
+
+        return view('admin.posts.create', compact(
+            'categories',
+            'statuses',
+        ));
     }
 
     public function preview(Request $request)
@@ -42,6 +54,12 @@ class PostController extends Controller
     {
         $categories = [];
         $statuses = PostStatus::toArray();
+
+        return view('admin.posts.edit', compact(
+            'categories',
+            'post',
+            'statuses',
+        ));
     }
 
     public function update(Request $request, Post $post)

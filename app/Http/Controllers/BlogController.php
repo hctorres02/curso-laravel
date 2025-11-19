@@ -10,10 +10,21 @@ class BlogController extends Controller
     public function category(Category $category)
     {
         $posts = [];
+
+        return view('blog.category', compact(
+            'category',
+            'posts',
+        ));
     }
 
     public function post(Category $category, Post $post)
     {
         $comments = [];
+
+        return view('blog.post', compact(
+            'category',
+            'comments',
+            'post',
+        ));
     }
 }
