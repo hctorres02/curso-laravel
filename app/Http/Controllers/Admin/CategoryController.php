@@ -14,7 +14,7 @@ class CategoryController extends Controller
     {
         $searchParams = $request->validated();
         $query = Category::query()
-            ->when($searchParams->get('search'), fn ($query, $search) => $query);
+            ->when($searchParams->get('search'), fn ($query, $search) => $query->whereLike('name', "%{$search}%"));
         $categories = $query->paginate();
 
         return view('admin.categories.index', compact(
