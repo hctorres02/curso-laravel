@@ -15,7 +15,9 @@ class MediaController extends Controller
     {
         $directories = MediaDirectory::toArray();
         $searchParams = $request->validated();
-        $query = Media::query();
+        $query = Media::query()
+            ->when($searchParams->get('directory'), fn ($query, $directory) => $query)
+            ->when($searchParams->get('search'), fn ($query, $search) => $query);
         $medias = $query->paginate();
 
         return view('admin.medias.index', compact(
