@@ -9,7 +9,7 @@ class BlogController extends Controller
 {
     public function category(Category $category)
     {
-        $posts = $category->posts()->published()->latest()->simplePaginate(5);
+        $posts = $category->posts()->published()->latest()->with('author', 'category')->simplePaginate(5);
 
         return view('blog.category', compact(
             'category',
@@ -19,7 +19,7 @@ class BlogController extends Controller
 
     public function post(Category $category, Post $post)
     {
-        $comments = $post->comments()->oldest()->simplePaginate(5);
+        $comments = $post->comments()->oldest()->with('author')->simplePaginate(5);
 
         return view('blog.post', compact(
             'category',
