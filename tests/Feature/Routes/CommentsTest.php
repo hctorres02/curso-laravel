@@ -33,7 +33,15 @@ test('POST comments.store', function () {
         ->assertRedirectToRoute('login');
 
     actingAs($admin)
-        ->post($route)
+        ->post($route, [
+            'body' => '',
+        ])
+        ->assertInvalid(['body']);
+
+    actingAs($admin)
+        ->post($route, [
+            'body' => 'Comment body',
+        ])
         ->assertRedirectBack();
 });
 

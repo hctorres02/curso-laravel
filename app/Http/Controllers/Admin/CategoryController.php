@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Category\IndexRequest;
+use App\Http\Requests\Admin\Category\StoreRequest;
+use App\Http\Requests\Admin\Category\UpdateRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(IndexRequest $request)
     {
         $searchParams = collect();
         $categories = [];
@@ -24,7 +26,7 @@ class CategoryController extends Controller
         return view('admin.categories.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -41,7 +43,7 @@ class CategoryController extends Controller
         ));
     }
 
-    public function update(Request $request, Category $category)
+    public function update(UpdateRequest $request, Category $category)
     {
         return back();
     }

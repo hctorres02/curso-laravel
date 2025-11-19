@@ -9,6 +9,7 @@ use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
 use function Pest\Laravel\put;
+use App\Enums\PostStatus;
 
 test('GET admin.posts.index', function () {
     $route = route('admin.posts.index');
@@ -16,6 +17,13 @@ test('GET admin.posts.index', function () {
 
     get($route)
         ->assertRedirectToRoute('login');
+
+    actingAs($admin)
+        ->get(route('admin.posts.index', [
+            'category_id' => 'not-exists',
+            'status' => 'not-exists',
+        ]))
+        ->assertSessionHasErrors(['category_id', 'status']);
 
     actingAs($admin)
         ->get($route)
@@ -95,7 +103,7 @@ test('GET admin.posts.edit', function () {
 });
 
 test('PUT admin.posts.update', function () {
-    $post = Post::factory()->create();
+    $post = Post::factory()->create(['status' => PostStatus::Draft]);
     $route = route('admin.posts.update', $post);
     $admin = User::factory()->create();
 
@@ -103,7 +111,23 @@ test('PUT admin.posts.update', function () {
         ->assertRedirectToRoute('login');
 
     actingAs($admin)
-        ->put($route)
+        ->put($route, [
+            'title' => '',
+            'body' => '<h1>Unsafe markdown</h1>',
+            'slug' => Post::factory()->create()->slug,
+            'category_id' => 'not-exists',
+            'status' => 'not-exists',
+        ])
+        ->assertInvalid(['title', 'body', 'slug', 'category_id', 'status']);
+
+    actingAs($admin)
+        ->put($route, [
+            'title' => 'New title',
+            'body' => '# New body',
+            'slug' => 'new-slug',
+            'category_id' => Category::factory()->create()->id,
+            'status' => PostStatus::Published->value,
+        ])
         ->assertRedirectBack();
 });
 

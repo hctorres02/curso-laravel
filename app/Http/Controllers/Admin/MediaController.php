@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\MediaDirectory;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Media\IndexRequest;
+use App\Http\Requests\Admin\Media\StoreRequest;
+use App\Http\Requests\Admin\Media\UpdateRequest;
 use App\Models\Media;
-use Illuminate\Http\Request;
 
 class MediaController extends Controller
 {
-    public function index()
+    public function index(IndexRequest $request)
     {
         $directories = MediaDirectory::toArray();
         $searchParams = collect();
@@ -27,7 +29,7 @@ class MediaController extends Controller
         return view('admin.medias.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -44,7 +46,7 @@ class MediaController extends Controller
         ));
     }
 
-    public function update(Request $request, Media $media)
+    public function update(UpdateRequest $request, Media $media)
     {
         return back();
     }
