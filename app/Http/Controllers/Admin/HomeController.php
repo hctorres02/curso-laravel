@@ -20,8 +20,8 @@ class HomeController extends Controller
         $countUsers = User::count();
 
         // charts
-        $monthlyPosts = [];
-        $monthlyComments = [];
+        $monthlyPosts = Post::countMonthly();
+        $monthlyComments = Comment::countMonthly();
         $storageUsage = [];
 
         return view('admin.home', compact(

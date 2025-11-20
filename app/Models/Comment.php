@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\CommentStatus;
+use App\Traits\ScopeMonthly;
 use App\Traits\TimestampsFormatter;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
@@ -14,6 +15,7 @@ use Illuminate\Support\Collection;
 class Comment extends Model
 {
     use HasFactory;
+    use ScopeMonthly;
     use TimestampsFormatter;
 
     protected $fillable = [

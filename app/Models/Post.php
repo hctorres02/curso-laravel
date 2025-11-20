@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\PostStatus;
+use App\Traits\ScopeMonthly;
 use App\Traits\TimestampsFormatter;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Attributes\Scope;
@@ -16,6 +17,7 @@ use Illuminate\Support\Collection;
 class Post extends Model
 {
     use HasFactory;
+    use ScopeMonthly;
     use TimestampsFormatter;
 
     protected $fillable = [
