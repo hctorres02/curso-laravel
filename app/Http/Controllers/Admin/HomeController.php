@@ -20,8 +20,19 @@ class HomeController extends Controller
         $countUsers = User::count();
 
         // charts
-        $monthlyPosts = Post::countMonthly();
-        $monthlyComments = Comment::countMonthly();
+        $monthlyPosts = Post::groupBy('month')
+            ->countMonthly()
+            ->pluck('posts', 'month')
+            ->mapWithKeys(fn ($v, $k) => [formatDateFrom($k) => $v]);
+        $monthlyPostsPublished = Post::groupBy('month')
+            ->countMonthly()
+            ->published()
+            ->pluck('posts', 'month')
+            ->mapWithKeys(fn ($v, $k) => [formatDateFrom($k) => $v]);
+        $monthlyComments = Comment::groupBy('month')
+            ->countMonthly()
+            ->pluck('comments', 'month')
+            ->mapWithKeys(fn ($v, $k) => [formatDateFrom($k) => $v]);
         $storageUsage = [];
 
         return view('admin.home', compact(
@@ -30,6 +41,7 @@ class HomeController extends Controller
             'countPosts',
             'countUsers',
             'monthlyPosts',
+            'monthlyPostsPublished',
             'monthlyComments',
             'storageUsage',
         ));

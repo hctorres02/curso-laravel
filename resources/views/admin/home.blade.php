@@ -44,4 +44,12 @@
             </h1>
         </article>
     </section>
+    <section class="grid" style="grid-row-gap: var(--pico-grid-row-gap);">
+        <x-chart title="Posts by month" type="line" :series="[
+            'All' => $monthlyPosts,
+            'Published' => $monthlyPostsPublished,
+        ]" />
+        <x-chart title="Comments by month" type="line" :series="$monthlyComments" />
+        <x-chart title="Storage usage" type="doughnut" :series="$storageUsage" />
+    </section>
 @endsection

@@ -19,6 +19,13 @@ if (! function_exists('decodeMarkdown')) {
     }
 }
 
+if (! function_exists('formatDateFrom')) {
+    function formatDateFrom(string $value, string $from = 'm-Y', string $format = 'M/y')
+    {
+        return Carbon::createFromFormat($from, $value)->format($format);
+    }
+}
+
 if (! function_exists('parseDate')) {
     function parseDate(string $value): Carbon
     {
