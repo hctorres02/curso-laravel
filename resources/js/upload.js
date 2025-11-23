@@ -5,9 +5,10 @@ export default async function (url, accept = '*') {
             type: 'file',
             multiple: true,
             async onchange() {
-                const response = await sendRequest(url, { attachments: this.files }) || []
+                const response = await sendRequest(url, { attachments: this.files })
+                const data = JSON.parse(response ?? '[]')
 
-                resolve(response)
+                resolve(data)
             }
         }).click()
     })

@@ -39,6 +39,9 @@ class UserController extends Controller
     public function store(StoreRequest $request)
     {
         $attributes = $request->validated();
+        $user = User::create($attributes);
+
+        return to_route('admin.users.edit', $user);
     }
 
     public function show(User $user)

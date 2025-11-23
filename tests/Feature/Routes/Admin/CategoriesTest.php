@@ -4,6 +4,7 @@ use App\Models\Category;
 use App\Models\User;
 
 use function Pest\Laravel\actingAs;
+use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
@@ -39,7 +40,28 @@ test('GET admin.categories.create', function () {
 });
 
 test('POST admin.categories.store', function () {
-    //
+    $route = route('admin.categories.store');
+    $admin = User::factory()->create();
+
+    post($route)
+        ->assertRedirectToRoute('login');
+
+    actingAs($admin)
+        ->post($route, [
+            'name' => '',
+            'description' => '',
+            'slug' => Category::factory()->create()->slug,
+        ])
+        ->assertInvalid(['name', 'description', 'slug']);
+
+    actingAs($admin)
+        ->post($route, [
+            'name' => 'Name',
+            'description' => 'Description',
+        ])
+        ->assertRedirect();
+
+    assertDatabaseHas('categories', ['slug' => 'name']);
 });
 
 test('GET admin.categories.show', function () {

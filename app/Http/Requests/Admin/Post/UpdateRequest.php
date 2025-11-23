@@ -3,14 +3,14 @@
 namespace App\Http\Requests\Admin\Post;
 
 use App\Models\Post;
-use App\Rules\UniqueSlug;
+use Illuminate\Validation\Rule;
 
 class UpdateRequest extends StoreRequest
 {
     public function rules(): array
     {
         return array_merge(parent::rules(), [
-            'slug' => [new UniqueSlug(Post::class)->ignoreModel($this->post)],
+            'slug' => ['required', 'max:255', Rule::unique(Post::class)->ignoreModel($this->post)],
         ]);
     }
 }

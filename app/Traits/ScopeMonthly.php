@@ -2,8 +2,8 @@
 
 namespace App\Traits;
 
-use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 
 trait ScopeMonthly
 {

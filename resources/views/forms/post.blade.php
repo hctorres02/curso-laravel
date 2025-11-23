@@ -2,10 +2,10 @@
     <x-input label="Title" name="title" required />
     <x-input label="Slug" name="slug" />
 </div>
-<x-textarea label="Body" name="body" x-data="{ md }" required>
+<x-textarea label="Body" name="body" x-data="{ md, preview: '{{ route('admin.posts.preview') }}' }" required>
     <x-slot name="markdownToolbar">
         <x-button icon="bold" @click="md('**{text}**')" />
-        <x-button icon="italic" @click="md('_{text}')" />
+        <x-button icon="italic" @click="md('_{text}_')" />
         <x-button icon="heading" @click="md('# {text}')" />
         <span class="separator"></span>
         <x-button icon="link" @click="md('[{text}](http://)')" />

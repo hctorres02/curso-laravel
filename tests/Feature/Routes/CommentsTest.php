@@ -1,9 +1,12 @@
 <?php
 
+use App\Enums\PostStatus;
 use App\Models\Comment;
+use App\Models\Post;
 use App\Models\User;
 
 use function Pest\Laravel\actingAs;
+use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
@@ -19,14 +22,14 @@ test('GET comments.index', function () {
         ->get($route)
         ->assertViewIs('comments.index')
         ->assertViewHasAll([
-            'shared_categories',
             'comments',
         ])
         ->assertOk();
 });
 
 test('POST comments.store', function () {
-    $route = route('comments.store');
+    $post = Post::factory()->create(['status' => PostStatus::Published]);
+    $route = route('comments.store', $post);
     $admin = User::factory()->create();
 
     post($route)
@@ -43,6 +46,8 @@ test('POST comments.store', function () {
             'body' => 'Comment body',
         ])
         ->assertRedirectBack();
+
+    assertDatabaseHas('comments', ['body' => 'Comment body']);
 });
 
 test('DELETE comments.destroy', function () {

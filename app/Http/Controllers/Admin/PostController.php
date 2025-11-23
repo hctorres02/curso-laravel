@@ -46,17 +46,21 @@ class PostController extends Controller
 
     public function preview(Request $request)
     {
-        //
+        return decodeMarkdown($request->string('body'));
     }
 
     public function store(StoreRequest $request)
     {
+        $author = $request->user();
         $attributes = $request->validated();
+        $post = $author->posts()->create($attributes);
+
+        return to_route('admin.posts.edit', $post);
     }
 
     public function show(Post $post)
     {
-        return to_route('blog.post', [$post->category, $post]);
+        return to_route('blog.post', ['category'=>$post->category, 'post'=>$post]);
     }
 
     public function edit(Post $post)

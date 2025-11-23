@@ -75,6 +75,7 @@ class Post extends Model
     protected function searchable(Builder $query, Collection $searchParams): void
     {
         $query
+            ->when($searchParams->get('author_id'), fn ($query, $author_id) => $query->where('author_id', $author_id))
             ->when($searchParams->get('category_id'), fn ($query, $category_id) => $query->where('category_id', $category_id))
             ->when($searchParams->get('search'), fn ($query, $search) => $query->whereLike('title', "%{$search}%"))
             ->when($searchParams->get('status'), fn ($query, $status) => $query->where('status', $status))

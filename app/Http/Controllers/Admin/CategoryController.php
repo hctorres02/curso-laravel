@@ -31,6 +31,9 @@ class CategoryController extends Controller
     public function store(StoreRequest $request)
     {
         $attributes = $request->validated();
+        $category = Category::create($attributes);
+
+        return to_route('admin.categories.edit', $category);
     }
 
     public function show(Category $category)

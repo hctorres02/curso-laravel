@@ -18,7 +18,9 @@ class CommentController extends Controller
 
     public function store(StoreRequest $request)
     {
+        $author = $request->user();
         $attributes = $request->validated();
+        $comment = $author->comments()->create($attributes);
 
         return back();
     }

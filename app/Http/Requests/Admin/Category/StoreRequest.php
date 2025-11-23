@@ -11,12 +11,8 @@ class StoreRequest extends FormRequest
 {
     public function prepareForValidation(): void
     {
-        $this->mergeIfMissing([
-            'slug' => $this->title,
-        ]);
-
         $this->merge([
-            'slug' => Str::slug($this->slug ?: $this->title),
+            'slug' => Str::slug($this->slug ?: $this->name),
         ]);
     }
 

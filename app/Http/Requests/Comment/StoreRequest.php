@@ -12,7 +12,7 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'post_slug' => ['required', Rule::exists(Post::class, 'slug')->where('status', PostStatus::Published)],
+            'post_id' => ['required', Rule::exists(Post::class, 'id')->where('status', PostStatus::Published)],
             'body' => ['required', 'max:300'],
         ];
     }

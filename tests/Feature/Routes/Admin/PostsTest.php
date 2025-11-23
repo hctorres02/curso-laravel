@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 
 use function Pest\Laravel\actingAs;
+use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
@@ -66,7 +67,33 @@ test('POST admin.posts.preview', function () {
 });
 
 test('POST admin.posts.store', function () {
-    //
+    $route = route('admin.posts.store');
+    $admin = User::factory()->create();
+
+    post($route)
+        ->assertRedirectToRoute('login');
+
+    actingAs($admin)
+        ->post($route, [
+            'title' => '',
+            'body' => '<h1>Unsafe markdown</h1>',
+            'slug' => Post::factory()->create()->slug,
+            'category_id' => 'not-exists',
+            'status' => 'not-exists',
+        ])
+        ->assertInvalid(['title', 'body', 'slug', 'category_id', 'status']);
+
+    actingAs($admin)
+        ->post($route, [
+            'title' => 'Title',
+            'slug' => 'slug',
+            'body' => '# Body',
+            'category_id' => Category::factory()->create()->id,
+            'status' => PostStatus::Published->value,
+        ])
+        ->assertRedirect();
+
+    assertDatabaseHas('posts', ['title' => 'Title', 'slug' => 'slug']);
 });
 
 test('GET admin.posts.show', function () {

@@ -19,7 +19,7 @@
     {!! $post->body_decoded !!}
     <section id="form-comment">
         <x-form method="post" :action="route('comments.store')">
-            <x-input name="post_slug" type="hidden" :value="$post->slug" />
+            <x-input name="post_id" type="hidden" :value="$post->id" />
             <x-textarea label="Comment" name="body" rows="3" />
             <x-button label="Comment" icon="comment" type="submit" />
         </x-form>

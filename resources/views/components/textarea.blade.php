@@ -23,7 +23,22 @@
     @if ($markdownToolbar)
         <div x-ref="toolbar" class="markdown-toolbar">
             {{ $markdownToolbar }}
+            <span class="separator"></span>
+            <button @click="decodeMarkdown">
+                <i class="fas fa-eye"></i>
+            </button>
         </div>
+        <template x-teleport="body">
+            <dialog x-ref="output">
+                <article @click.outside="$refs.output.removeAttribute('open')">
+                    <header>
+                        <strong>Preview</strong>
+                        <button rel="prev" @click="$refs.output.removeAttribute('open')" aria-label="Close"></button>
+                    </header>
+                    <div></div>
+                </article>
+            </dialog>
+        </template>
     @endif
     <textarea {{ $attributes->except(['x-data'])->merge([
         'rows' => 10,
@@ -87,6 +102,16 @@
                     textarea.setSelectionRange(start, start + text.length)
                     textarea.focus()
                 }
+            }
+
+            async function decodeMarkdown(event) {
+                event.preventDefault()
+
+                const { textarea, output } = this.$refs
+                const data = await sendRequest(this.preview, { body: textarea.value })
+
+                output.querySelector('div').innerHTML = data
+                output.setAttribute('open', true)
             }
         </script>
     @endPushIf

@@ -8,7 +8,6 @@ test('GET home', function () {
     get($route)
         ->assertViewIs('home')
         ->assertViewHasAll([
-            'shared_categories',
             'posts',
         ])
         ->assertOk();

@@ -39,11 +39,5 @@ export default async function (url, fields = {}) {
         throw new Error(response.statusText)
     }
 
-    if (response.status == 204) {
-        return
-    }
-
-    const responseText = await response.text()
-
-    return responseText ? JSON.parse(responseText) : responseText
+    return await response.text()
 }

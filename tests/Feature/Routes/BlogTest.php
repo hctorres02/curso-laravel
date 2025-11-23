@@ -15,7 +15,6 @@ test('GET blog.category', function () {
     get($route)
         ->assertViewIs('blog.category')
         ->assertViewHasAll([
-            'shared_categories',
             'category',
             'posts',
         ])
@@ -29,7 +28,6 @@ test('GET blog.post', function () {
     get($route)
         ->assertViewIs('blog.post')
         ->assertViewHasAll([
-            'shared_categories',
             'category',
             'post',
         ])
