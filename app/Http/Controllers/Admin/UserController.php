@@ -64,6 +64,7 @@ class UserController extends Controller
     public function update(UpdateRequest $request, User $user)
     {
         $attributes = $request->validated();
+        $user->update($attributes);
 
         return back();
     }

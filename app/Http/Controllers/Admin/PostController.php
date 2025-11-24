@@ -78,6 +78,7 @@ class PostController extends Controller
     public function update(UpdateRequest $request, Post $post)
     {
         $attributes = $request->validated();
+        $post->update($attributes);
 
         return back();
     }

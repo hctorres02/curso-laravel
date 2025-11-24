@@ -24,6 +24,10 @@ class CommentController extends Controller
 
     public function approve(Comment $comment)
     {
+        $comment->update([
+            'status' => CommentStatus::Approved,
+        ]);
+
         return back();
     }
 

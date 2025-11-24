@@ -116,6 +116,8 @@ test('PUT admin.categories.update', function () {
             'description' => 'New description',
         ])
         ->assertRedirectBack();
+
+    assertDatabaseHas('categories', ['slug' => 'new-name']);
 });
 
 test('DELETE admin.categories.destroy', function () {
