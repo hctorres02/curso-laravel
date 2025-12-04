@@ -85,16 +85,25 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+        $post->comments()->delete();
+        $post->delete();
+
         return back();
     }
 
     public function forceDestroy(Post $post)
     {
+        $post->comments()->forceDelete();
+        $post->forceDelete();
+
         return to_route('admin.posts.index');
     }
 
     public function restore(Post $post)
     {
+        $post->restore();
+        $post->comments()->restore();
+
         return back();
     }
 }

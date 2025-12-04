@@ -7,6 +7,8 @@ use App\Http\Requests\Admin\Category\IndexRequest;
 use App\Http\Requests\Admin\Category\StoreRequest;
 use App\Http\Requests\Admin\Category\UpdateRequest;
 use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Post;
 
 class CategoryController extends Controller
 {
@@ -58,16 +60,30 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        $posts = $category->posts()->pluck('id');
+
+        Comment::whereIn('post_id', $posts)->delete();
+        Post::whereIn('id', $posts)->delete();
+
+        $category->delete();
+
         return back();
     }
 
     public function forceDestroy(Category $category)
     {
+        $category->posts()->forceDelete();
+        $category->forceDelete();
+
         return to_route('admin.categories.index');
     }
 
     public function restore(Category $category)
     {
+        $category->restore();
+        $category->posts()->restore();
+        $category->posts()->comments()->delete();
+
         return back();
     }
 }

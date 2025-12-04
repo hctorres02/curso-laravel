@@ -71,16 +71,25 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        $user->comments()->delete();
+        $user->posts()->delete();
+
         return back();
     }
 
     public function forceDestroy(User $user)
     {
+        $user->comments()->forceDelete();
+        $user->posts()->forceDelete();
+
         return to_route('admin.users.index');
     }
 
     public function restore(User $user)
     {
+        $user->posts()->restore();
+        $user->comments()->restore();
+
         return back();
     }
 }
